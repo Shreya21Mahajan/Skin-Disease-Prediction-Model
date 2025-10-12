@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaScan - Login</title>
+    <style>
+        html, body { 
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body { 
+            font-family: sans-serif; 
+            background-color: #f0f2f5; 
+            color: #333; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;    
+            min-height: 100vh;      
+            padding: 20px;
+            box-sizing: border-box; 
+            position: relative;
+        }
+        .container { 
+            max-width: 400px; 
+            width: 100%;
+            min-height: 350px; /* Slightly increased min-height for new links */
+            display: flex;             
+            flex-direction: column;    
+            justify-content: center; 
+            align-items: center;
+            
+            margin: auto; 
+            padding: 40px; 
+            background-color: white; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); 
+            text-align: center; 
+        }
+        .header h1 { 
+            color: #4CAF50; 
+            font-size: 2.5em; 
+            margin: 0 0 10px 0; 
+        }
+        .header h2 {
+            color: #1e88e5;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .btn-primary { 
+            background-color: #1e88e5; 
+            color: white; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1.2em; 
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .btn-primary:hover { 
+            background-color: #1565c0; 
+        }
+        /* ⭐️ NEW STYLE FOR ACCOUNT OPTIONS ⭐️ */
+        .account-options {
+            margin-top: 25px;
+            font-size: 0.9em;
+        }
+        .account-options a {
+            color: #1e88e5;
+            text-decoration: none;
+        }
+        .account-options a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DermaScan</h1>
+            <h2>Authentication</h2>
+            {% if error %}
+                <p style="color: red; margin-bottom: 15px;">{{ error }}</p>
+            {% endif %}
+        </div>
+
+        <form method="POST" action="/login" style="width: 100%;">
+            <div class="form-group">
+                <input type="text" name="username" placeholder="Name(e.g., Vihaan Nambiar)" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn-primary">
+                Log In
+            </button>
+        </form>
+        
+        <div class="account-options">
+            <p>New User? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+</body>
+</html>

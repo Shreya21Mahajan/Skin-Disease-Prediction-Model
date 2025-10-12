@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DermaScan - Request Access</title>
+    <!-- Consistent styling for the secure BAS environment -->
+    <style>
+        html, body { 
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body { 
+            font-family: sans-serif; 
+            background-color: #f0f2f5; 
+            color: #333; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;    
+            min-height: 100vh;      
+            padding: 20px;
+            box-sizing: border-box; 
+            position: relative;
+        }
+        .container { 
+            max-width: 450px; 
+            width: 100%;
+            min-height: 400px; 
+            display: flex;             
+            flex-direction: column;    
+            justify-content: center; 
+            align-items: center;
+            
+            margin: auto; 
+            padding: 40px; 
+            background-color: white; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12); 
+            text-align: center; 
+        }
+        .header h1 { 
+            color: #4CAF50; 
+            font-size: 2.5em; 
+            margin: 0 0 10px 0; 
+        }
+        .header h2 {
+            color: #1e88e5;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .btn-primary { 
+            background-color: #1e88e5; 
+            color: white; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1.2em; 
+            transition: background-color 0.3s;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .btn-primary:hover { 
+            background-color: #1565c0; 
+        }
+        .info-box {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        .account-options {
+            margin-top: 25px;
+            font-size: 0.9em;
+        }
+        .account-options a {
+            color: #1e88e5;
+            text-decoration: none;
+        }
+        .account-options a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>DermaScan</h1>
+            <h2>New User Access Request</h2>
+        </div>
+        
+        <div class="info-box">
+            <p><strong>Note:</strong> New users must set a secure password upon initial system provisioning.</p>
+        </div>
+
+        <form method="POST" action="/submit_request" style="width: 100%;">
+            <div class="form-group">
+                <input type="text" name="full_name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Contact Email (for notifications)" required>
+            </div>
+            
+            <!-- ⭐️ NEW PASSWORD FIELD ⭐️ -->
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Set Password" required>
+            </div>
+            
+            <!-- ⭐️ CONFIRM PASSWORD FIELD ⭐️ -->
+            <div class="form-group">
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+
+            <button type="submit" class="btn-primary" disabled>
+                Submit Access Request
+            </button>
+        </form>
+        
+        <div class="account-options">
+            <p>Already a user? <a href="/login">Log In Here</a></p>
+        </div>
+    </div>
+</body>
+</html>
