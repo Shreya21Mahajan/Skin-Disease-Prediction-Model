@@ -84,3 +84,8 @@ Future Improvements
 - Deploy to Render/HuggingFace Spaces
 - Add dermatologist feedback module
 - Implement more model architectures
+
+Trained Models:
+Since ensemble learning is used, MobileNetV2 and EfficientNet-B0 models are used for training the dataset. You can download it from the below link provided.
+- Link for MobileNetV2 model: https://drive.google.com/file/d/1_37-KjfaPnFuDDZCQMNSU4g1U9Xiw9g9/view?usp=sharing
+- Link for EfficientNet-B0 model: https://drive.google.com/file/d/1GkjWDB41eFROKdUaHCFjtr66DXJqiBPm/view?usp=sharing
