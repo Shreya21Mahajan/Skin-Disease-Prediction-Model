@@ -79,6 +79,8 @@ python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 python app.py
+python download_model.py
+
 Future Improvements
 - Add Grad-CAM visualization
 - Deploy to Render/HuggingFace Spaces
