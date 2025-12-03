@@ -4,8 +4,8 @@ from PIL import Image
 import numpy as np
 import os
 
-# Import model + constants (MODEL, CLASS_NAMES, IMAGE_SIZE)
-from skin_model import DERSCAN_MODEL, CLASS_NAMES, IMAGE_SIZE
+# Import unified prediction function
+from skin_model import DERMACAN_ENSEMBLE, CLASS_NAMES, IMAGE_SIZE
 
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
@@ -19,7 +19,7 @@ ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png"}
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# USER AUTHENTICATION
+# USER AUTH FUNCTIONS
 DUMMY_USER_DATA = {
     "name": "Anil Sharma",
     "last_login": "2025-10-12 17:30 IST",
@@ -90,7 +90,7 @@ def analysis_page():
         return redirect(url_for("login"))
     return render_template("index.html", conditions=CLASS_NAMES)
 
-# AI PREDICTION ENDPOINT
+# AI PREDICTION API
 @app.route("/api/analyze", methods=["POST"])
 def analyze():
     if "file" not in request.files:
@@ -105,27 +105,21 @@ def analyze():
         return jsonify({"error": "Invalid file type. Use JPG, JPEG, PNG."}), 400
 
     try:
-        # Read + preprocess image
         img = Image.open(file.stream).convert("RGB")
         img = img.resize((IMAGE_SIZE, IMAGE_SIZE))
-        img_array = np.array(img) / 255.0
+        img_array = np.array(img, dtype=np.float32) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
 
-        # Ensure model is ready
-        if DERSCAN_MODEL is None:
-            return jsonify({"error": "Model not loaded on server."}), 503
+        # Run ENSEMBLE prediction
+        preds = DERMACAN_ENSEMBLE(img_array)
 
-        # Run prediction
-        preds = DERSCAN_MODEL.predict(img_array)
         predicted_index = int(np.argmax(preds[0]))
         confidence = float(preds[0][predicted_index])
 
-        result = {
+        return jsonify({
             "prediction": CLASS_NAMES[predicted_index],
             "confidence": round(confidence * 100, 2)
-        }
-
-        return jsonify(result)
+        })
 
     except Exception as e:
         return jsonify({"error": f"Prediction failed: {str(e)}"}), 500
