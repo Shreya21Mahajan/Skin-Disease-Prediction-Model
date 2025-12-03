@@ -88,13 +88,13 @@
 
 <body>
 
-    <!-- TOP NAV -->
+    <TOP NAV>
     <div class="top-nav">
         <a href="/" class="nav-icon">&#x2302; Home</a>
         <a href="/logout" class="nav-icon logout-btn">&#x21AA; Logout</a>
     </div>
 
-    <!-- MAIN CONTAINER -->
+    <MAIN CONTAINER>
     <div class="container">
 
         <div class="header">
@@ -103,7 +103,7 @@
             <p>Upload a skin image and get instant AI-powered analysis.</p>
         </div>
 
-        <!-- IMAGE UPLOAD -->
+        <IMAGE UPLOAD>
         <div class="input-group">
             <input type="file" id="image-upload" accept="image/*" style="display:none;">
             <button class="btn-primary" onclick="document.getElementById('image-upload').click();">&#x2191; Start Analysis</button>
@@ -114,7 +114,7 @@
             <p>Analyzing image... Please wait.</p>
         </div>
 
-        <!-- RESULTS -->
+        <RESULTS>
         <div id="results-container">
             <h3>AI Analysis Results</h3>
             <div id="analysis-list"></div>
@@ -123,7 +123,7 @@
             </p>
         </div>
 
-        <!-- CONDITIONS LIST -->
+        <CONDITIONS LIST>
         <div class="detectable-conditions">
             <h3>Detectable Conditions</h3>
             {% for condition in conditions %}
