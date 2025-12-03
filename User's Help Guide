@@ -1,0 +1,57 @@
+* User Help Guide – How to Upload Files on GitHub* 
+
+1. Upload Files Through GitHub Website (Easiest)
+
+Step 1 — Open Your Repository
+Go to: https://github.com/Shreya21Mahajan/Skin-Disease-Prediction-Model
+
+Step 2 — Click "Add file"
+
+Step 3 — Select "Upload files"
+
+Step 4 — Drag and Drop Your Files
+Examples: .py, .html, .css, .pptx, .docx, .pdf, .jpg, .png
+
+Step 5 — Commit Changes
+Scroll down and click "Commit changes".
+
+2. Upload Files Using Git (Advanced)
+
+Step 1 — Place your file inside your project folder.
+
+Step 2 — Open Terminal.
+
+Step 3 — Run:
+git add yourfile.ext
+
+Step 4 — Commit:
+git commit -m "Added new file"
+
+Step 5 — Push:
+git push
+
+3. Upload Files Inside a Folder (Recommended)
+
+Create folders like:
+docs/  (PPT, reports)
+models/ (ML models)
+templates/ (HTML)
+src/ (ML scripts)
+
+To upload:
+Open folder → Add file → Upload files → Commit.
+
+Important Notes
+- GitHub upload limit: 100 MB/file
+- Do NOT upload environment folders (env/, venv/, tfenv/)
+- Do NOT upload large datasets
+- Do NOT upload passwords or secret keys
+
+Tips
+- Use GitHub Desktop if you're a beginner.
+- Keep file names simple and clean.
+- Use docs/ folder for PPT and Word files.
+
+You’re Ready!
+You can now upload any file to GitHub safely.
+
