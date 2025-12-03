@@ -1,0 +1,58 @@
+
+User Help Guide – How to Run This Program from GitHub
+
+1. Download the Project from GitHub
+Option 1 — Clone using Git:
+https://github.com/Shreya21Mahajan/Skin-Disease-Prediction-Model
+cd Skin-Disease-Prediction-Model
+
+Option 2 — Download ZIP:
+- Go to the GitHub repository
+- Click Code → Download ZIP
+- Extract the ZIP file
+
+2. Install Python3.10 version
+Download from https://www.python.org/downloads/
+Check “Add to PATH” during installation.
+
+3. Create a Virtual Environment
+python -m venv venv
+
+4. Activate the Environment
+Windows:
+venv\Scripts\activate
+Mac/Linux:
+source venv/bin/activate
+
+5. Install Required Libraries
+pip install -r requirements.txt
+
+6. Run the Flask Application
+python app.py
+Then open the link shown:
+http://127.0.0.1:5000/
+
+7. Use the Web Application
+- Login or Register
+- Upload a skin image
+- Click Predict
+- View the disease prediction result
+
+8. Troubleshooting
+Dependency errors:
+pip install -r requirements.txt
+Flask not found:
+pip install flask
+TensorFlow not found:
+pip install tensorflow
+Virtual environment not activating:
+Set-ExecutionPolicy Unrestricted -Scope Process
+
+9. Update the Program
+git pull
+
+10. Contact / Support
+Open an Issue on GitHub for help.
+
+You're ready to use the system!
+
