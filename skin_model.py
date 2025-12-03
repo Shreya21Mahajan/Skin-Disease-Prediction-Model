@@ -1,55 +1,44 @@
-# skin_model.py – FINAL VERSION (WORKS WITH REAL MODEL)
-
 import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
+print(">>> Using TensorFlow-Keras Model Loader <<<")
+
+import tensorflow as tf
 import numpy as np
-from keras.models import load_model
+from PIL import Image
 
-# MODEL FILE PATH
-MODEL_PATH = "dermascan_model.h5"
+# Load using tf.keras because model was trained using tf.keras
+print("Loading models...")
 
-# IMAGE SIZE (MUST MATCH TRAINING)
-IMAGE_SIZE = 160    # MobileNetV2 input size
+mobilenet_model = tf.keras.models.load_model("mobilenet_final.keras", compile=False)
+efficientnet_model = tf.keras.models.load_model("dermascan_efficientnetb0.keras", compile=False)
 
-# CLASS NAMES (MATCH YOUR FOLDER ORDER)
+print("Models loaded successfully!")
 
 CLASS_NAMES = [
-    "Eczema",
-    "Melanoma",
-    "Atopic Dermatitis",
-    "Basal Cell Carcinoma (BCC)",
-    "Melanocytic Nevi (NV)",
-    "Benign Keratosis-like Lesions (BKL)",
-    "Psoriasis / Lichen Planus",
-    "Seborrheic Keratoses",
-    "Tinea / Ringworm / Candidiasis",
-    "Warts / Molluscum / Viral Infections"
+    "atopic_dermatitis",
+    "basal_cell_carcinoma",
+    "benign_keratosis-like_lesions",
+    "eczema",
+    "melanocytic_nevi",
+    "melanoma",
+    "psoriasis_pictures_lichen_planus",
+    "seborrheic_keratoses",
+    "tinea_ringworm_candidiasis",
 ]
 
-# LOAD TRAINED MODEL
-def load_dermascan_model():
-    """Load the trained skin disease model."""
-    try:
-        if not os.path.exists(MODEL_PATH):
-            print("\n ERROR: Model file not found!\n")
-            print("Expected file:", MODEL_PATH)
-            print("Please train the model first using train_model.py\n")
-            return None
+IMAGE_SIZE = 224
 
-        print("Loading trained DermaScan model...")
-        model = load_model(MODEL_PATH)
+def preprocess_image(img_path):
+    img = Image.open(img_path).convert("RGB")
+    img = img.resize((IMAGE_SIZE, IMAGE_SIZE))
+    img_array = np.array(img, dtype=np.float32) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
 
-        if model is None:
-            print("Model loader returned None.")
-            return None
+def ensemble_predict(image_array):
+    p1 = mobilenet_model.predict(image_array, verbose=0)
+    p2 = efficientnet_model.predict(image_array, verbose=0)
+    return (p1 + p2) / 2
 
-        print("Model loaded successfully.")
-        print("➡ Input shape:", getattr(model, "input_shape", None))
-        print("➡ Output shape:", getattr(model, "output_shape", None))
-        return model
-
-    except Exception as e:
-        print("Failed to load model:", str(e))
-        return None
-
-# GLOBAL MODEL (used by app.py)
-DERSCAN_MODEL = load_dermascan_model()
+DERMACAN_ENSEMBLE = ensemble_predict
